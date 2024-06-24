@@ -1,6 +1,6 @@
 <script lang="ts">
 import { RouterLink } from 'vue-router'
-import PaperVue from '../Paper/Paper.vue'
+import Paper from '../Paper/Paper.vue'
 import { ref } from 'vue'
 import IconClose from '../icons/IconClose.vue'
 import IconMenu from '../icons/IconMenu.vue'
@@ -20,7 +20,7 @@ const handleSignOut = () => {
 export default {
   components: {
     RouterLink,
-    PaperVue,
+    Paper,
     IconMenu,
     IconClose
   },
@@ -36,7 +36,7 @@ export default {
 </script>
 <template>
   <header class="mx-auto">
-    <PaperVue>
+    <Paper>
       <div class="rounded-div flex items-center justify-between h-20 font-bold mx-auto text-black">
         <RouterLink to="/">
           <h1 class="text-2xl">Beru Cryptobase</h1>
@@ -94,6 +94,6 @@ export default {
           </div>
         </div>
       </div>
-    </PaperVue>
+    </Paper>
   </header>
 </template>
