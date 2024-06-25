@@ -1,23 +1,12 @@
 <script lang="ts">
+import { computed, defineComponent, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import Paper from '../Paper/Paper.vue'
-import { ref } from 'vue'
 import IconClose from '../icons/IconClose.vue'
 import IconMenu from '../icons/IconMenu.vue'
+import { useStore } from 'vuex'
 
-const nav = ref(false)
-const user = ref<{ email?: string }>({})
-
-const handleNav = () => {
-  nav.value = !nav.value
-}
-
-const handleSignOut = () => {
-  // Logic để đăng xuất
-  console.log('Signing out')
-}
-
-export default {
+export default defineComponent({
   components: {
     RouterLink,
     Paper,
@@ -25,15 +14,38 @@ export default {
     IconClose
   },
   setup() {
+    const nav = ref(false)
+    const user = ref<{ email?: string }>({})
+
+    const handleNav = () => {
+      nav.value = !nav.value
+    }
+
+    const handleSignOut = () => {
+      // Logic để đăng xuất
+      console.log('Signing out')
+    }
+
+    const store = useStore()
+
+    const count = computed(() => store.state.count)
+
+    const increment = () => {
+      store.commit('increment')
+    }
+
     return {
       nav,
       user,
       handleNav,
-      handleSignOut
+      handleSignOut,
+      count,
+      increment
     }
   }
-}
+})
 </script>
+
 <template>
   <header class="mx-auto">
     <Paper>
@@ -41,6 +53,10 @@ export default {
         <RouterLink to="/">
           <h1 class="text-2xl">Beru Cryptobase</h1>
         </RouterLink>
+        <div>
+          <p>Count: {{ count }}</p>
+          <button @click="increment">Increment</button>
+        </div>
         <div v-if="user?.email">
           <RouterLink to="/account" class="p-4">Account</RouterLink>
           <button @click="handleSignOut">Sign out</button>
