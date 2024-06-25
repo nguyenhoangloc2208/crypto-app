@@ -32,7 +32,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="md:w-2/3 min-w-[300px] mx-auto">
+  <div class="md:w-3/4 min-w-[300px] mx-auto">
     <Navbar />
     <router-view :coins="coins" class="mt-12"></router-view>
   </div>

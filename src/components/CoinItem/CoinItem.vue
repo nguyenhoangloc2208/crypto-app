@@ -22,7 +22,7 @@
     <td class="w-[180px] hidden md:table-cell">${{ coin.total_volume.toLocaleString() }}</td>
     <td class="w-[180px] hidden sm:table-cell">${{ coin.market_cap.toLocaleString() }}</td>
     <td>
-      <!-- <ejs-sparkline :dataSource="coin.sparkline_in_7d.price" type="Line"></ejs-sparkline> -->
+      <spark-line class="m-auto" :data="coin.sparkline_in_7d.price" :width="120" :height="30" />
     </td>
   </tr>
 </template>
@@ -36,13 +36,15 @@ import IconOutlineStar from '../icons/IconOutlineStar.vue'
 // import { useUserAuth } from '../context/AuthContext'
 import { db } from '../../firebase'
 import { Coin } from '../../type'
+import SparkLine from './SparklineVue.vue'
 
 export default defineComponent({
   name: 'CoinItem',
   components: {
     IconFillStar,
     IconOutlineStar,
-    RouterLink
+    RouterLink,
+    SparkLine
   },
   props: {
     coin: {
@@ -52,6 +54,7 @@ export default defineComponent({
   },
   setup(props) {
     const savedCoin = ref(false)
+
     // const { user } = useUserAuth()
 
     // const saveCoin = async () => {
