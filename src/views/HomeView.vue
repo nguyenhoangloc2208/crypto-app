@@ -50,24 +50,26 @@ export default defineComponent({
           />
         </form>
       </div>
-      <table class="w-full border-collapse text-center">
-        <thead>
-          <tr class="border-b">
-            <th></th>
-            <th class="px-4">#</th>
-            <th class="text-left">Coin</th>
-            <th></th>
-            <th>Price</th>
-            <th>24h</th>
-            <th class="hidden md:table-cell">24h Volume</th>
-            <th class="hidden sm:table-cell">Mkt</th>
-            <th>Last 7 Days</th>
-          </tr>
-        </thead>
-        <tbody>
-          <CoinItem v-for="coin in filteredCoins" :key="coin.id" :coin="coin" />
-        </tbody>
-      </table>
+      <div class="overflow-y-auto max-h-[100vh]">
+        <table class="w-full border-collapse text-center">
+          <thead class="sticky top-0 bg-white">
+            <tr class="border-b">
+              <th></th>
+              <th class="px-4">#</th>
+              <th class="text-left">Coin</th>
+              <th></th>
+              <th>Price</th>
+              <th>24h</th>
+              <th class="hidden md:table-cell">24h Volume</th>
+              <th class="hidden sm:table-cell">Mkt</th>
+              <th>Last 7 Days</th>
+            </tr>
+          </thead>
+          <tbody>
+            <CoinItem v-for="coin in filteredCoins" :key="coin.id" :coin="coin" />
+          </tbody>
+        </table>
+      </div>
     </div>
   </Paper>
 </template>
