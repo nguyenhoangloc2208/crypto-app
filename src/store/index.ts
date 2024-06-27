@@ -1,24 +1,10 @@
-// store/index.ts
 import { createStore } from 'vuex'
+import themeModule from './modules/theme'
 
-interface State {
-  count: number
-}
-
-const initialState: State = {
-  count: parseInt(localStorage.getItem('count') || '0') || 0
-}
-
-const store = createStore<State>({
-  state: initialState,
-  mutations: {
-    increment(state: State) {
-      state.count++
-      localStorage.setItem('count', state.count.toString())
-    }
-  },
-  actions: {},
-  getters: {}
+const store = createStore({
+  modules: {
+    theme: themeModule
+  }
 })
 
 export default store

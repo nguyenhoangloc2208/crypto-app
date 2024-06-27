@@ -1,12 +1,7 @@
 <template>
-  <svg
-    class="stroke-teal-600 fill-emerald-50"
-    :width="width"
-    :height="height"
-    :stroke-width="stroke"
-  >
+  <svg class="stroke-teal-500" :width="width" :height="height" :stroke-width="stroke">
     <path :d="shape" fill="none"></path>
-    <path :d="[shape, fillEndPath].join(' ')" stroke="none"></path>
+    <path :d="[shape, fillEndPath].join(' ')" stroke="none" class="fill-teal-600 opacity-10"></path>
   </svg>
 </template>
 
@@ -19,7 +14,7 @@ export default {
   },
   data() {
     return {
-      stroke: 2
+      stroke: 1
     }
   },
 

@@ -13,7 +13,7 @@ export default {
   props: {
     color: {
       type: String,
-      default: 'text-black'
+      default: 'text-primary'
     },
     size: {
       type: String,

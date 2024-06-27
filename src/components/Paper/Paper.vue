@@ -24,7 +24,10 @@ export default defineComponent({
   },
   computed: {
     computedClasses(): string {
-      return twMerge(`shadow w-full rounded-lg bg-white dark:bg-dblack p-4`, this.className)
+      return twMerge(
+        `border border-secondary rounded-2xl shadow-xl bg-primary px-2 max-w-[1140px] w-full mx-auto`,
+        this.className
+      )
     }
   }
 })
