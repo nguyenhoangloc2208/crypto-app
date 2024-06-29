@@ -40,7 +40,7 @@ export default defineComponent({
 
 <template>
   <tr class="h-[80px] border-b overflow-hidden">
-    <td @click="saveCoin">
+    <td @click="saveCoin" class="cursor-pointer">
       <component :is="savedCoin ? 'IconFillStar' : 'IconOutlineStar'" class="text-primary" />
     </td>
     <td>{{ coin.market_cap_rank }}</td>

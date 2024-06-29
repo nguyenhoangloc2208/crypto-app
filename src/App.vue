@@ -5,12 +5,12 @@ import { Coin } from './type'
 import axios from 'axios'
 import { onMounted } from 'vue'
 import { useStore } from 'vuex'
-
-const store = useStore()
+import CustomFooter from './components/Footer/AppFooter.vue'
 
 export default defineComponent({
   components: {
-    Navbar
+    Navbar,
+    CustomFooter
   },
   setup() {
     const store = useStore()
@@ -42,7 +42,8 @@ export default defineComponent({
   <div class="w-full bg-secondary">
     <div class="md:w-3/4 min-w-[300px] mx-auto">
       <Navbar />
-      <router-view :coins="coins" class="mt-12"></router-view>
+      <router-view :coins="coins" class="mt-12 min-h-[30vh]"></router-view>
+      <CustomFooter />
     </div>
   </div>
 </template>
