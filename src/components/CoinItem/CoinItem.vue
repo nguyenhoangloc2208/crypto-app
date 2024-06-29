@@ -62,7 +62,7 @@ export default defineComponent({
     <td class="w-[180px] hidden md:table-cell">${{ coin.total_volume.toLocaleString() }}</td>
     <td class="w-[180px] hidden sm:table-cell">${{ coin.market_cap.toLocaleString() }}</td>
     <td>
-      <spark-line
+      <SparkLine
         class="m-auto"
         :data="coin.sparkline_in_7d.price"
         :width="isSmallScreen ? 80 : 120"

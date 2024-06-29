@@ -18,6 +18,7 @@ export default defineComponent({
 
     onMounted(async () => {
       await store.dispatch('initializeTheme')
+      await store.dispatch('auth/initAuth')
 
       if (coins.value.length === 0) {
         try {

@@ -27,17 +27,26 @@ const authModule: Module<AuthState, any> = {
     async signUp({ commit }, { email, password }) {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password)
       await setDoc(doc(db, 'users', email), { watchList: [] })
+      localStorage.setItem('user', JSON.stringify(userCredential.user))
       commit('SET_USER', userCredential.user)
     },
     async signIn({ commit }, { email, password }) {
       const userCredential = await signInWithEmailAndPassword(auth, email, password)
+      localStorage.setItem('user', JSON.stringify(userCredential.user))
       commit('SET_USER', userCredential.user)
     },
     async logOut({ commit }) {
       await signOut(auth)
+      localStorage.removeItem('user')
       commit('SET_USER', null)
     },
     initAuth({ commit }) {
+      const userString = localStorage.getItem('user')
+      if (userString) {
+        const user = JSON.parse(userString)
+        commit('SET_USER', user)
+      }
+
       onAuthStateChanged(auth, (user) => {
         commit('SET_USER', user)
       })
