@@ -5,6 +5,7 @@ import { useRoute } from 'vue-router'
 import SparkLine from '../../components/CoinItem/SparklineVue.vue'
 import 'primeicons/primeicons.css'
 import Paper from '../../components/Paper/Paper.vue'
+import DOMPurify from 'dompurify'
 
 export default defineComponent({
   name: 'CoinPage',
@@ -23,10 +24,14 @@ export default defineComponent({
     const url = `https://api.coingecko.com/api/v3/coins/${routeParams.value.params.coinId}?localization=false&sparkline=true`
 
     onMounted(async () => {
-      error.value = ''
       try {
         const response = await axios.get(url)
         coin.value = response.data
+        if (coin.value.description && coin.value.description.en) {
+          coin.value.description.en = coin.value.description.en
+            .replace(/\r\n/g, '<br>')
+            .replace(/<a /g, '<a class="text-accent underline underline-offset-2"')
+        }
         sparkline.value = response.data.market_data?.sparkline_7d.price
         error.value = null
         console.log(response.data)
@@ -42,13 +47,18 @@ export default defineComponent({
       }
     })
 
+    const sanitizeHtml = (dirtyHtml: string) => {
+      return DOMPurify.sanitize(dirtyHtml)
+    }
+
     return {
       coin,
       routeParams,
       sparkline,
       paperRef,
       paperWidth,
-      error
+      error,
+      sanitizeHtml
     }
   }
 })
@@ -178,7 +188,11 @@ export default defineComponent({
     <!-- Description -->
     <div class="py-4">
       <p class="text-xl font-bold">About {{ coin.name }}</p>
-      <p v-if="coin.description" v-html="coin.description.en"></p>
+      <p
+        class="mt-5 coin-description"
+        v-if="coin.description"
+        v-html="sanitizeHtml(coin.description.en)"
+      ></p>
     </div>
   </Paper>
 </template>
