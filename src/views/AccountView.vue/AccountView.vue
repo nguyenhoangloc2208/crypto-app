@@ -33,9 +33,9 @@ export default defineComponent({
 </script>
 <template>
   <div class="max-w-[1140px] mx-auto">
-    <Paper class="flex justify-between items-center my-12 py-8">
+    <Paper class="flex justify-between items-center my-12 py-8 relative">
       <div>
-        <h1 class="text-2xl font-bold">Account</h1>
+        <h1 class="text-2xl font-bold mb-5">Account</h1>
         <div>
           <p>Welcome, {{ user?.email }}</p>
         </div>
@@ -43,7 +43,7 @@ export default defineComponent({
       <div>
         <button
           @click="handleSignOut"
-          class="border px-6 py-2 rounded-2xl shadow-lg hover:shadow-2xl"
+          class="absolute md:block top-8 right-0 border bg-button text-btnText px-8 font-medium py-2 rounded-2xl shadow-lg hover:shadow-2xl"
         >
           Sign Out
         </button>
