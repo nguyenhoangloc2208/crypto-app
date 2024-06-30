@@ -3,10 +3,12 @@ import { defineComponent, ref } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import Paper from '../../components/Paper/Paper.vue'
+import SavedCoin from '../../components/SavedCoin/SavedCoin.vue'
 
 export default defineComponent({
   components: {
-    Paper
+    Paper,
+    SavedCoin
   },
   setup() {
     const store = useStore()
@@ -50,7 +52,7 @@ export default defineComponent({
     <Paper class="flex justify-between items-center my-12 py-8">
       <div class="w-full min-h-[300px]">
         <h1 class="text-2xl font-bold py-4">Watch List</h1>
-        <div>Item</div>
+        <SavedCoin />
       </div>
     </Paper>
   </div>

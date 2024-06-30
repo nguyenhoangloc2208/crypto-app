@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, onMounted, ref } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import Paper from '../Paper/Paper.vue'
 import IconClose from '../icons/IconClose.vue'
@@ -38,16 +38,20 @@ export default defineComponent({
         router.push('/')
       }
     }
-
-    if (store.getters['auth/user']) {
-      user.value = store.getters['auth/user']
-    }
+    onMounted(() => {
+      const storedUser = localStorage.getItem('user')
+      if (storedUser) {
+        user.value = JSON.parse(storedUser)
+        store.commit('auth/SET_USER', user.value)
+      }
+    })
 
     return {
       nav,
       user,
       handleNav,
-      handleSignOut
+      handleSignOut,
+      isLoggedIn: computed(() => !!store.getters['auth/user'])
     }
   }
 })
@@ -61,7 +65,7 @@ export default defineComponent({
     <div class="hidden md:block">
       <ThemeToggle />
     </div>
-    <div v-if="user?.email">
+    <div v-if="isLoggedIn">
       <RouterLink to="/account" class="p-4">Account</RouterLink>
       <button @click="handleSignOut">Sign out</button>
     </div>
