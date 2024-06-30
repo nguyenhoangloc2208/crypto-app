@@ -1,10 +1,11 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRoute, useRouter } from 'vue-router'
 import Paper from '../Paper/Paper.vue'
 import IconClose from '../icons/IconClose.vue'
 import IconMenu from '../icons/IconMenu.vue'
 import ThemeToggle from './ThemeToggle/ThemeToggle.vue'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   components: {
@@ -17,6 +18,9 @@ export default defineComponent({
   setup() {
     const nav = ref(false)
     const user = ref<{ email?: string }>({})
+    const store = useStore()
+    const router = useRouter()
+    const route = useRoute()
 
     const handleNav = () => {
       nav.value = !nav.value
@@ -28,8 +32,15 @@ export default defineComponent({
     }
 
     const handleSignOut = () => {
-      // Logic để đăng xuất
-      console.log('Signing out')
+      store.dispatch('auth/logOut')
+      user.value = {}
+      if (route.path === '/account') {
+        router.push('/')
+      }
+    }
+
+    if (store.getters['auth/user']) {
+      user.value = store.getters['auth/user']
     }
 
     return {
