@@ -2,25 +2,34 @@
 import { defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
+import validateEmail from '../../utils/validateEmail'
 
 export default defineComponent({
   name: 'SignInView',
   components: {},
   setup() {
-    const email = ref('')
-    const password = ref('')
+    const email = ref<string>('')
+    const password = ref<string>('')
     const error = ref('')
     const router = useRouter()
     const store = useStore()
+    const isLoading = ref<boolean>(false)
 
     const handleSubmit = async () => {
-      error.value = ''
-      try {
-        await store.dispatch('auth/signIn', { email: email.value, password: password.value })
-        router.push('/account')
-      } catch (e) {
-        error.value = e.message
-        console.log(e.message)
+      if (!validateEmail(email.value)) {
+        error.value = 'Invalid email address'
+      } else {
+        error.value = ''
+        try {
+          isLoading.value = true
+          await store.dispatch('auth/signIn', { email: email.value, password: password.value })
+          router.push('/account')
+        } catch (e) {
+          error.value = e.message ? e.message : e
+          console.log(e.message)
+        } finally {
+          isLoading.value = false
+        }
       }
     }
 
@@ -28,7 +37,8 @@ export default defineComponent({
       email,
       password,
       error,
-      handleSubmit
+      handleSubmit,
+      isLoading
     }
   }
 })
@@ -59,8 +69,14 @@ export default defineComponent({
             />
           </div>
         </div>
-        <button class="w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl">
-          Sign in
+        <button
+          :disabled="isLoading"
+          class="w-full my-2 p-3 bg-button text-btnText rounded-2xl shadow-xl"
+        >
+          <div v-if="isLoading" class="flex justify-center items-center">
+            <span class="loading loading-spinner loading-sm mt-1 mx-auto block"></span>
+          </div>
+          <span v-else>Sign in</span>
         </button>
       </form>
       <p class="my-4">

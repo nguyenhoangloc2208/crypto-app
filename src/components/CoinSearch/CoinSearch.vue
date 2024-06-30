@@ -17,7 +17,8 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const searchText = ref('')
+    const searchText = ref<string>('')
+    const isLoading = ref<boolean>(true)
 
     const filteredCoins = computed(() =>
       props.coins.filter((value) => {
@@ -31,7 +32,8 @@ export default defineComponent({
 
     return {
       searchText,
-      filteredCoins
+      filteredCoins,
+      isLoading
     }
   }
 })
@@ -50,7 +52,10 @@ export default defineComponent({
         />
       </form>
     </div>
-    <div class="md:overflow-y-auto md:max-h-[100vh]">
+    <div v-if="isLoading" class="flex justify-center items-center">
+      <span class="loading loading-spinner loading-lg mt-3 mx-auto block"></span>
+    </div>
+    <div v-else class="md:overflow-y-auto md:max-h-[100vh]">
       <table class="w-full border-collapse text-center">
         <thead class="sticky top-0 bg-primary">
           <tr class="border-b">

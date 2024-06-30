@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, onMounted, ref, watchEffect } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
 import axios from 'axios'
 import Paper from '../Paper/Paper.vue'
 
@@ -31,10 +31,6 @@ export default defineComponent({
     }
 
     onMounted(fetchTrending)
-
-    watchEffect(() => {
-      console.log('trending changed:', trending.value)
-    })
 
     return {
       trending

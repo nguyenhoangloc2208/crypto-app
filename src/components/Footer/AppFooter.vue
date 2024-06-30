@@ -28,7 +28,7 @@ export default defineComponent({
 <template>
   <Paper class="rounded-div mt-8 pt-8 text-primary">
     <div class="grid md:grid-cols-2">
-      <div class="flex justify-evenly w-full md:max-w-[300px] uppercase">
+      <div class="flex justify-between w-full md:max-w-[300px] uppercase">
         <div>
           <h2 class="font-bold">Support</h2>
           <ul>

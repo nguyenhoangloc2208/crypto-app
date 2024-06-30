@@ -22,6 +22,7 @@ export default defineComponent({
     const paperRef = ref<any>(null)
     const paperWidth = ref<number | null>(null)
     const url = `https://api.coingecko.com/api/v3/coins/${routeParams.value.params.coinId}?localization=false&sparkline=true`
+    const isLoading = ref<boolean>(true)
 
     onMounted(async () => {
       try {
@@ -34,10 +35,11 @@ export default defineComponent({
         }
         sparkline.value = response.data.market_data?.sparkline_7d.price
         error.value = null
-        console.log(response.data)
       } catch (e) {
         console.error('Error fetching data:', e)
         error.value = 'Error fetching data: ' + e.message
+      } finally {
+        isLoading.value = false
       }
     })
 
@@ -58,7 +60,8 @@ export default defineComponent({
       paperRef,
       paperWidth,
       error,
-      sanitizeHtml
+      sanitizeHtml,
+      isLoading
     }
   }
 })
@@ -66,7 +69,10 @@ export default defineComponent({
 
 <template>
   <div v-if="error" class="text-red-500">{{ error }}. Too Many Requests</div>
-  <Paper v-else class="rounded-div my-12 py-8">
+  <div v-else-if="isLoading" class="flex justify-center items-center h-[78vh]">
+    <span class="loading loading-spinner loading-lg mt-3 mx-auto block"></span>
+  </div>
+  <Paper v-else class="my-12 py-8">
     <div v-if="coin.image" class="flex py-8">
       <img class="w-20 mr-8" :src="coin.image?.large" alt="/" />
       <div>

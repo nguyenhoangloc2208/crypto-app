@@ -25,7 +25,7 @@ export default defineComponent({
   computed: {
     computedClasses(): string {
       return twMerge(
-        `border border-secondary rounded-2xl shadow-xl bg-primary px-2 max-w-[1140px] w-full mx-auto`,
+        `border border-secondary rounded-2xl shadow-xl bg-primary p-4 max-w-[1140px] w-full mx-auto`,
         this.className
       )
     }

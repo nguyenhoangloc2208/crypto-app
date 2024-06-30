@@ -23,7 +23,6 @@ const themeModule: Module<ThemeState, any> = {
   actions: {
     initializeTheme({ commit }) {
       const storedTheme = localStorage.getItem('theme')
-      console.log('aaa')
 
       if (storedTheme && ['dark', 'light'].includes(storedTheme)) {
         commit('setTheme', storedTheme as 'light' | 'dark')
