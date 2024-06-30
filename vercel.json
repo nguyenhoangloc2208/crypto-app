@@ -1,0 +1,11 @@
+{
+  "framework": "vite",
+  "public": true,
+  "installCommand": "npm install -f",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ]
+}
