@@ -46,7 +46,7 @@ export default defineComponent({
           v-model="searchText"
           type="text"
           placeholder="search a coin"
-          class="border rounded-md border-input w-full px-4 py-2 shadow-xl"
+          class="border rounded-md text-primary border-input w-full px-4 py-2 shadow-xl bg-input"
         />
       </form>
     </div>

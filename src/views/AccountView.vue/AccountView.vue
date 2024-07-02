@@ -43,7 +43,7 @@ export default defineComponent({
       <div>
         <button
           @click="handleSignOut"
-          class="absolute md:block top-8 right-0 border bg-button text-btnText px-8 font-medium py-2 rounded-2xl shadow-lg hover:shadow-2xl"
+          class="absolute md:block top-8 right-0 bg-button text-btnText px-8 font-medium py-2 rounded-2xl shadow-lg hover:shadow-2xl"
         >
           Sign Out
         </button>

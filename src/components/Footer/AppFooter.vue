@@ -59,7 +59,7 @@ export default defineComponent({
               <form @submit.prevent="handleSubmit">
                 <input
                   v-model="email"
-                  class="bg-primary border border-input p-2 mr-2 w-full shadow-xl rounded-2xl md:w-auto"
+                  class="text-primary p-2 mr-2 w-full shadow-xl rounded-2xl md:w-auto bg-input"
                   type="email"
                   placeholder="Enter your email"
                 />

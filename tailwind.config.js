@@ -9,7 +9,8 @@ export default {
       backgroundColor: {
         primary: 'var(--color-bg-primary)',
         secondary: 'var(--color-bg-secondary)',
-        button: 'var(--color-bg-button)'
+        button: 'var(--color-bg-button)',
+        input: 'var(--color-bg-input)'
       },
       textColor: {
         accent: 'var(--color-text-accent)',
@@ -18,7 +19,8 @@ export default {
         btnText: 'var(--color-bg-secondary)'
       },
       borderColor: {
-        secondary: 'var(--color-bg-secondary)'
+        secondary: 'var(--color-bg-secondary)',
+        input: 'var(--color-bg-input)'
       },
       fill: {
         primary: 'var(--color-text-primary)',
